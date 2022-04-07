@@ -1,0 +1,130 @@
+.container{
+  padding: 2rem 20%;
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #f1f4f9, #dff1ff);
+
+  .headerContainer{
+    display:flex;
+    justify-content:center;
+    align-items:flex-end;
+    img{
+      width: 10rem;
+    }
+    h1{
+      font-size: 4rem;
+    }
+  }
+
+  .color {
+    position: absolute;
+    filter: blur(150px);
+  }
+  
+
+  .color:nth-child(1) {
+    top: -350px;
+    width: 100%;
+    height: 100%;
+    max-width: 600px;
+    max-height: 600px;
+    background-color: teal;
+  }
+
+  .color:nth-child(2) {
+    bottom: 50px;
+    right: 100px;
+    width: 100%;
+    height: 100%;
+    max-width: 500px;
+    max-height: 500px;
+    background-color: turquoise;
+  }
+
+  .color:nth-child(3) {
+    bottom: 50px;
+    left: 100px;
+    width: 100%;
+    height: 100%;
+    max-width: 300px;
+    max-height: 300px;
+    background-color: blueviolet;
+  }
+
+  .btnContainer {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    margin-bottom:0.1rem;
+    // padding-right: 0.2rem;
+    button{
+      border-radius: 10%;
+    }
+
+
+  }
+
+  .cardContainer{
+    padding: 2rem 1.5rem;
+    border: 1px solid rgba(128,128,128,0.2);
+    border-radius:0 0 1.5rem 1.5rem;
+    box-shadow: 0px 1px 3px 1px rgba(3,3,3,0.2);
+    position: relative;
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+
+    .todoCard:not(:last-child){
+      margin-bottom: 1rem;
+    }
+  }
+  
+}
+
+.todoCard{
+  border: 1px solid rgba(128,128,128,0.2);
+  border-radius: 0.8rem;
+  padding: 10px;
+  padding-left: 20px;
+  border-left: 5px solid #FF7730;
+  box-shadow: 0px 1px 3px 1px rgba(128,128,128,0.2);
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &:hover{
+    transform: scale(1.2);
+    color:#333;
+    background-color:rgba(255, 255, 255, 0.5);
+    z-index: 1000;
+    cursor: pointer;
+  }
+
+  .detailBtn{
+    margin-right: 3rem;
+    padding: 5px 3rem;
+    background: #FF7730;
+    border-radius: 1rem;
+    color: #fff;
+    border-color: transparent;
+    height: auto;
+  }
+}
+
+.contentModal {
+  background-color: #fff;
+  border-radius: 7px;
+  font-family: var(--primaryFont);
+  :global {
+    .ant-descriptions-item-label {
+      width: 210px;
+    }
+    .ant-space-item {
+      margin-bottom: 10px !important;
+    }
+  }
+}

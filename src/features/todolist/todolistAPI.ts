@@ -1,5 +1,4 @@
 import { notification } from 'antd';
-import { TodoType } from './todolistSlice';
 
 // A mock function to mimic making an async request for data
 export async function fetchTodos() {
@@ -7,7 +6,7 @@ export async function fetchTodos() {
 		const data = await fetch(
 			'https://virtserver.swaggerhub.com/hanabyan/todo/1.0.0/to-do-list',
 			{
-				method: 'GET', // or 'PUT'
+				method: 'GET',
 				headers: {
 					'Content-Type': 'application/json',
 				},

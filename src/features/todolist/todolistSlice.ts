@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import moment from 'moment';
 import { RootState, AppThunk } from '../../app/store';
 import { fetchTodos } from './todolistAPI';
 
@@ -38,24 +39,32 @@ export const todolistSlice = createSlice({
 	name: 'todolist',
 	initialState,
 	reducers: {
-		increment: (state) => {
-			// Redux Toolkit allows us to write "mutating" logic in reducers. It
-			// doesn't actually mutate the state because it uses the Immer library,
-			// which detects changes to a "draft state" and produces a brand new
-			// immutable state based off those changes
-		},
-		decrement: (state) => {
-			// state.value -= 1;
-		},
-		// Use the PayloadAction type to declare the contents of `action.payload`
-		incrementByAmount: (state, action: PayloadAction<number>) => {
-			// state.value += action.payload;
-		},
 		addTodo: (state, action: PayloadAction<TodoType>) => {
-			state.value.push(action.payload);
+			const collectIds = state.value?.map((item) => item.id);
+			const newId = collectIds?.length > 0 ? Math.max(...collectIds) : 0;
+			const newTodo = {
+				...action.payload,
+				id: newId + 1,
+				createdAt: moment(new Date()).format('YYYY-MM-DD hh:mm'),
+			};
+			state.value.push(newTodo);
 		},
 		removeTodoById: (state, action: PayloadAction<number>) => {
 			state.value = state.value?.filter((item) => item?.id !== action.payload);
+		},
+		updateTodo: (state, action: PayloadAction<TodoType>) => {
+			state.value = state.value?.map((todo) => {
+				if (todo.id === action.payload?.id) {
+					console.log(action.payload);
+					return action.payload;
+				}
+				return todo;
+			});
+		},
+		filterTodoByStatus: (state, action: PayloadAction<number>) => {
+			state.value = state.value?.filter(
+				(todo) => todo.status === action.payload
+			);
 		},
 	},
 	// The `extraReducers` field lets the slice handle actions defined elsewhere,
@@ -74,7 +83,7 @@ export const todolistSlice = createSlice({
 	},
 });
 
-export const { increment, decrement, addTodo, removeTodoById } =
+export const { addTodo, removeTodoById, filterTodoByStatus, updateTodo } =
 	todolistSlice.actions;
 
 export const selectTodo = (state: RootState) => state.todolist.value;
